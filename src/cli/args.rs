@@ -24,6 +24,14 @@ pub struct Args {
     /// Download all items without interactive selection
     #[arg(long)]
     pub all: bool,
+
+    /// Select specific items (e.g. "1", "1,3-5") — skips interactive selection
+    #[arg(short, long)]
+    pub items: Option<String>,
+
+    /// Skip chapter selection, download full video(s)
+    #[arg(long)]
+    pub no_chapters: bool,
 }
 
 impl Args {

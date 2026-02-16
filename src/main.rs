@@ -11,6 +11,7 @@ use cli::args::Args;
 use cli::interactive;
 use core::downloader::download_all;
 use core::playlist::{PlaylistFetcher, YtDlpFetcher};
+use core::range_parser::parse_ranges;
 use model::config::DownloadConfig;
 
 #[tokio::main]
@@ -52,6 +53,8 @@ async fn run() -> error::Result<()> {
 
         let indices = if args.all {
             (1..=videos.len()).collect()
+        } else if let Some(ref items_str) = args.items {
+            parse_ranges(items_str, videos.len())?
         } else {
             interactive::prompt_selection(videos.len())?
         };
@@ -86,7 +89,7 @@ async fn run() -> error::Result<()> {
             }
         }
 
-        if video.has_chapters() {
+        if video.has_chapters() && !args.no_chapters {
             interactive::prompt_chapter_selection(video)?;
         }
     }
