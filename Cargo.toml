@@ -1,0 +1,15 @@
+[package]
+name = "yt-grab"
+version = "0.1.0"
+edition = "2021"
+description = "Interactive YouTube playlist downloader"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+console = "0.15"
+dialoguer = "0.11"
+indicatif = "0.17"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
